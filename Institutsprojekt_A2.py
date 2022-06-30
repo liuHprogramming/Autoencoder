@@ -110,13 +110,20 @@ autoencoder.decoder.summary()
 # encoding
 encoded_imgs = autoencoder.encoder(train_images_noisy).numpy()
 
+# Tensor des ersten Bildes aus der Datenbank ausgeben,bevor wir AWGN im Channel addiert haben
+print(encoded_imgs[0])
+
+
 # AWGN im Channel addieren
-awgn = komm.AWGNChannel()
-awgn.snr = 7.5
+
+awgn = komm.AWGNChannel()           # AWGN Channel
+awgn.snr = 15
+
 for img in encoded_imgs:            # Tensor aus jedem Bild der Datenbank aufrufen
-    for mat in img:                 # jede 7*8 Matrix aus dem Tensor aufrufen
-        for arr in mat:             # jede 1*8 Array aus der Matrix aufrufen
-            arr = awgn(arr)         # addieren AWGN in jedem Array
+    for i in range(img.shape[0]):                 # jede 7*8 Matrix aus dem Tensor aufrufen
+        for j in range(img.shape[1]):             # jede 1*8 Array aus der Matrix aufrufen
+            img[i][j] = awgn(img[i][j])         # addieren AWGN in jedem Array
+
 
 # Tensor des ersten Bildes aus der Datenbank ausgeben,nachdem wir AWGN im Channel addiert haben
 print(encoded_imgs[0])
