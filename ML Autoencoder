@@ -118,7 +118,7 @@ print(encoded_imgs[0])
 # QPSK und AWGN Channel initialisieren
 QPSK = komm.PSKModulation(4, phase_offset=0)          # QPSK Channel
 awgn = komm.AWGNChannel()                                   # AWGN Channel
-awgn.snr = 15
+awgn.snr = random.uniform(1, 15)
 
 for img in encoded_imgs:                    # Tensor aus jedem Bild der Datenbank aufrufen
     img = img.reshape(-1)                   # Tensor im Vektor umwandeln
@@ -141,6 +141,7 @@ print(encoded_imgs[0])
 decoded_imgs = autoencoder.decoder(encoded_imgs).numpy()
 
 
+# Eingabe und Ausgabe zeichnen
 n = 10
 plt.figure(figsize=(20, 4))
 for i in range(n):
