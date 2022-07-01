@@ -121,7 +121,7 @@ awgn = komm.AWGNChannel()                                   # AWGN Channel
 
 # Modulation,AWGN und Demodulation fuer jedes Bild von 10000 Train-Bilder
 for img in encoded_imgs:                    # Tensor aus jedem Bild der Datenbank aufrufen
-    awgn.snr = random.uniform(1, 15)
+    awgn.snr = random.uniform(1, 15)        # eine random double Zahl zwischen 1-15 fuer SNR des Bildes waehlen
     img = img.reshape(-1)                   # Tensor im Vektor umwandeln
 # Vektor aus numpy Array im normalen Array speichern,damit wir Komm Bibliothek benutzen koennen
     img_arr = [0]*len(img)
